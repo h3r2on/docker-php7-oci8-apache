@@ -4,7 +4,7 @@ MAINTAINER Amin Mkh <mukh_amin@yahoo.com>
 
 # installing required stuff
 RUN apt-get update \
-    && apt-get install -y unzip libaio-dev libmcrypt-dev git \
+    && apt-get install -y unzip libaio-dev libmcrypt-dev git ldap-utils libldap2-dev \
     && apt-get clean -y
 
 # PHP extensions
@@ -13,14 +13,7 @@ RUN \
     && docker-php-ext-configure mysqli --with-mysqli=mysqlnd \
     && docker-php-ext-install pdo_mysql \
     && docker-php-ext-install mbstring \
-    && docker-php-ext-install mcrypt \
     && docker-php-ext-install ldap
-
-# xdebug, if you want to debug
-RUN pecl install xdebug
-
-# PHP composer
-RUN curl -sS https://getcomposer.org/installer | php --  --install-dir=/usr/bin --filename=composer
 
 # apache configurations, mod rewrite
 RUN ln -s /etc/apache2/mods-available/rewrite.load /etc/apache2/mods-enabled/rewrite.load
