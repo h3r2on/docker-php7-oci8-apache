@@ -1,6 +1,6 @@
 FROM php:7-apache
 
-MAINTAINER Amin Mkh <mukh_amin@yahoo.com> 
+MAINTAINER Amin Mkh <mukh_amin@yahoo.com>
 
 # installing required stuff
 RUN apt-get update \
@@ -13,7 +13,8 @@ RUN \
     && docker-php-ext-configure mysqli --with-mysqli=mysqlnd \
     && docker-php-ext-install pdo_mysql \
     && docker-php-ext-install mbstring \
-    && docker-php-ext-install mcrypt
+    && docker-php-ext-install mcrypt \
+    && docker-php-ext-install ldap
 
 # xdebug, if you want to debug
 RUN pecl install xdebug
